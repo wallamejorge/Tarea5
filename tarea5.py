@@ -26,7 +26,8 @@ for i in range(len(media_mensual)):
   manchas.append(media_mensual[i])
 
 plt.plot(years,manchas, 'ro')
-plt.ylabel('Numero de Machas vs Tiempo')
+plt.ylabel('Numero de Machas')
+plt.xlabel('Tiempo anual')
 plt.grid()
 plt.show()
 
@@ -35,21 +36,22 @@ n=len(manchas)
 fft_x = fft(manchas)/n # FFT Normalized
 timestep = 1.0/12.0
 freq=fftfreq(n, d=timestep)
-'''
+
 plt.plot(freq,np.abs(fft_x))
 plt.ylabel('Potencias vs Frecuencias')
+plt.xlabel('frecuencias filtradas')
 plt.scatter(freq,np.abs(fft_x))
 plt.grid()
 plt.show()
-'''
 #Modulo 2: Espectros de potencias vs f
 f_shifted=np.fft.fftshift(freq)
 fftx_shifted=np.fft.fftshift(fft_x)
 Pot=np.abs(fftx_shifted)*np.abs(fftx_shifted)
 
 plt.plot(f_shifted,Pot)
-plt.ylabel('Potencias vs Frecuencias')
 plt.scatter(f_shifted,Pot)
+plt.ylabel('Potencias')
+plt.xlabel('Frecuencias')
 plt.grid()
 plt.show()
 
@@ -73,8 +75,9 @@ for i in range(1,len(freq_half)):
             new_Pot.append(np.abs(fft_x_half[i])*np.abs(fft_x_half[i]))
  
 plt.plot(T,new_Pot)
-plt.ylabel('Potencias vs Tiempo')
 plt.scatter(T,new_Pot)
+plt.ylabel('Potencias')
+plt.xlabel('Tiempo')
 plt.grid()
 plt.show()
 
@@ -92,8 +95,9 @@ frecuencias=freq
 Potencias=np.abs(fft_x)*np.abs(fft_x)
 
 plt.plot(frecuencias,Potencias)
-plt.ylabel('Potencias vs frecuencias filtradas')
 plt.scatter(frecuencias,Potencias)
+plt.ylabel('Potencias')
+plt.xlabel('Frecuencias filtradas')
 plt.grid()
 plt.show()
 
@@ -108,6 +112,9 @@ for i in range(len(manchas)):
     y_modelo.append(np.real(clean_f[i])/np.amax(np.real(clean_f)) * np.amax(manchas))
 
 plt.plot(t,y_real,'r',t,y_modelo,'g')
+plt.legend (['Observaciones', 'Prediccion'])
+plt.ylabel('Numero de Machas')
+plt.xlabel('Tiempo anual')
 plt.show()
 
 #Modulo 6:Prediccion
